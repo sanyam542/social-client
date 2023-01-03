@@ -13,14 +13,9 @@ export default function Post(props) {
   const [user, setUser] = useState([]);
   const { user: currentUser } = useContext(AuthContext);
 
-  useEffect(
-    () => {
-      setIsLiked(props.post.likes.includes(currentUser._id));
-      console.log(isLiked);
-    },
-    currentUser._id,
-    props.post.likes
-  );
+  useEffect(() => {
+    setIsLiked(props.post.likes.includes(currentUser._id));
+  }, [currentUser._id, props.post.likes]);
 
   const PF = process.env.REACT_APP_PUBLIC_FOLDER;
 

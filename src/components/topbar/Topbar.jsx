@@ -11,6 +11,11 @@ export default function Topbar() {
   const PF = process.env.REACT_APP_PUBLIC_FOLDER;
   const { user } = useContext(AuthContext);
 
+  const handleLogout = () => {
+    localStorage.clear();
+    window.location.reload();
+  };
+
   return (
     <div className="topbarContainer">
       <div className="topbarLeft">
@@ -38,14 +43,21 @@ export default function Topbar() {
             <span className="topbarIconBadge">1</span>
           </div>
           <div className="topbarIconItem">
-            <ChatIcon />
-            <span className="topbarIconBadge">1</span>
+            <a href="/messenger">
+              <ChatIcon />
+              <span className="topbarIconBadge">1</span>
+            </a>
           </div>
           <div className="topbarIconItem">
             <NotificationsIcon />
             <span className="topbarIconBadge">1</span>
           </div>
         </div>
+
+        <button onClick={handleLogout} className="logout">
+          LogOut
+        </button>
+
         <Link to={`/profile/${user.username}`}>
           <img
             src={
