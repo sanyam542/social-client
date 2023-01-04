@@ -77,9 +77,12 @@ export default function Login() {
             <button className="loginButton" type="submit">
               Sign Up
             </button>
-
-            <button className="loginRegisterButton">Log into Account</button>
           </form>
+          <div className="loginRegisterButton">
+            <a className="a" href="/login">
+              Already a user? Log In
+            </a>
+          </div>
         </div>
       </div>
     </div>
