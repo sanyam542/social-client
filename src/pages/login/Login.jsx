@@ -9,6 +9,7 @@ export default function Login() {
   const email = useRef();
   const password = useRef();
   const { user, isFetching, error, dispatch } = useContext(AuthContext);
+  console.log(AuthContext);
 
   const handleClick = (e) => {
     loginCall(
@@ -18,6 +19,7 @@ export default function Login() {
     // console.log(email.current.value, password.current.value);
     e.preventDefault();
     console.log(user);
+    console.log(error);
   };
 
   //
