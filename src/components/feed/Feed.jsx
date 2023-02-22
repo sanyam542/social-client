@@ -17,7 +17,7 @@ export default function Feed(props) {
       const res = props.username
         ? await axios
             .get(
-              "https://social-api-6q3t.onrender.com/posts/profile/" +
+              "https://social-api-6q3t.onrender.com/api/posts/profile/" +
                 props.username
             )
             .then(function (response) {
@@ -34,7 +34,8 @@ export default function Feed(props) {
             })
         : await axios
             .get(
-              "https://social-api-6q3t.onrender.com/posts/timeline/" + user._id
+              "https://social-api-6q3t.onrender.com/api/posts/timeline/" +
+                user._id
             )
             .then(function (response) {
               // handle success
