@@ -49,8 +49,7 @@ export default function Messenger() {
     const getConversations = async () => {
       try {
         const res = await axios.get(
-          "https://thunderous-pasca-e2cda8.netlify.app/api/conversations/" +
-            user._id
+          "https://social-api-6q3t.onrender.com/api/conversations/" + user._id
         );
         setConversations(res.data);
         console.log(res.data);
@@ -65,7 +64,7 @@ export default function Messenger() {
     const getMessages = async () => {
       try {
         const res = await axios.get(
-          "https://thunderous-pasca-e2cda8.netlify.app/api/messages/" +
+          "https://social-api-6q3t.onrender.com/api/messages/" +
             currentChat?._id
         );
         setMessages(res.data);
@@ -96,7 +95,7 @@ export default function Messenger() {
 
     try {
       const res = await axios.post(
-        "https://thunderous-pasca-e2cda8.netlify.app/api/messages",
+        "https://social-api-6q3t.onrender.com/api/messages",
         message
       );
       setMessages([...messages, res.data]);
