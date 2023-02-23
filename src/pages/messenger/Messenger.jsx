@@ -52,7 +52,6 @@ export default function Messenger() {
           "https://social-api-6q3t.onrender.com/api/conversations/" + user._id
         );
         setConversations(res.data);
-        console.log(res.data);
       } catch (err) {
         console.log(err);
       }
