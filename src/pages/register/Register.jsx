@@ -23,7 +23,7 @@ export default function Login() {
       };
 
       await axios
-        .post("/auth/register", user)
+        .post("https://social-api-6q3t.onrender.com/api/auth/register", user)
         .then(function (response) {
           console.log(response);
           navigate("/login");
