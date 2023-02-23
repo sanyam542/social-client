@@ -32,14 +32,17 @@ export default function Share() {
       newPost.img = fileName;
       console.log(data);
       try {
-        axios.post("/api/upload", data);
+        axios.post("https://social-api-6q3t.onrender.com/api/upload", data);
       } catch (err) {
         console.log(err);
       }
     }
 
     try {
-      await axios.post("/api/posts", newPost);
+      await axios.post(
+        "https://social-api-6q3t.onrender.com/api/posts",
+        newPost
+      );
       window.location.reload();
     } catch (err) {
       console.log(err);
