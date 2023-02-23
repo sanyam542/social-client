@@ -49,7 +49,7 @@ export default function Messenger() {
     const getConversations = async () => {
       try {
         const res = await axios.get(
-          "https://thunderous-pasca-e2cda8.netlify.app/conversations/" +
+          "https://thunderous-pasca-e2cda8.netlify.app/api/conversations/" +
             user._id
         );
         setConversations(res.data);

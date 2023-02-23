@@ -21,9 +21,14 @@ export default function Post(props) {
 
   const likeHandler = () => {
     try {
-      axios.put("/posts/" + props.post._id + "/like", {
-        userId: currentUser._id,
-      });
+      axios.put(
+        "https://thunderous-pasca-e2cda8.netlify.app/api/posts/" +
+          props.post._id +
+          "/like",
+        {
+          userId: currentUser._id,
+        }
+      );
     } catch (err) {
       console.log(err);
     }
@@ -39,7 +44,9 @@ export default function Post(props) {
   useEffect(() => {
     const fetchUser = async () => {
       await axios
-        .get(`/users/?userId=${props.post.userId}`)
+        .get(
+          `https://thunderous-pasca-e2cda8.netlify.app/api/users/?userId=${props.post.userId}`
+        )
         .then(function (response) {
           // handle success
           setUser(response.data);
