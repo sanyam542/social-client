@@ -53,6 +53,7 @@ export default function Messenger() {
             user._id
         );
         setConversations(res.data);
+        console.log(res.data);
       } catch (err) {
         console.log(err);
       }
