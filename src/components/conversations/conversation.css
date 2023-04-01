@@ -5,6 +5,7 @@
     padding: 10px;
     cursor: pointer;
     margin-top: 20px;
+    position: relative;
   }
   
   .conversation:hover {
@@ -23,8 +24,28 @@
     font-weight: 500;
   }
   
+/* .convName{
+  position: absolute;
+  font-size: 10px;
+  background-color: white;
+  left: 18px;
+    top: 52px;
+} */
+
   @media screen and (max-width: 768px) {
     .conversationName {
-      display: none;
+      /* display: none; */
+/* font-size: 10px;  */
+max-width: 100%;
+    }
+    .conversationImg{
+      margin: 0;
+    }
+    .conversation{
+      flex-direction: column;
+
+      /* max-width: 40px; */
+      font-size: 12px;
     }
   }
+  

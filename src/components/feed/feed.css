@@ -6,3 +6,16 @@
     padding: 20px;
     /* margin: 40px; */
 }
+
+@media screen and (min-width:1024px) {
+    #feedSearchBar{
+        display: none;
+    }
+}
+#feedSearchBar{
+
+    margin-bottom: 20px;
+}
+.editOptionText{
+    position: absolute;
+}

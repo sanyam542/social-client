@@ -24,58 +24,61 @@ export default function Login() {
 
   //
   return (
-    <div className="login">
-      <div className="loginWrapper">
-        <div className="loginLeft">
-          <h3 className="loginLogo">Lamasocial</h3>
-          <span className="loginDesc">
-            Connece with friends and the world around you on Lamasocial.
-          </span>
-        </div>
-        <div className="loginRight">
-          <form className="loginBox " onSubmit={handleClick}>
-            <input
-              placeholder="Email"
-              required
-              type="email"
-              className="loginInput"
-              ref={email}
-            />
-            <input
-              ref={password}
-              required
-              minLength="6"
-              placeholder="Password"
-              type="password"
-              className="loginInput"
-            />
-            <button className="loginButton">
-              {isFetching ? (
-                <CircularProgress
-                  color="inherit"
-                  size="20px"
-                  disabled={isFetching}
-                />
-              ) : (
-                "Log in"
-              )}
-            </button>
+    <>
+      <div className="login">
+        <div className="loginWrapper">
+          <div className="loginLeft">
+            <h3 className="loginLogo">GetSocial</h3>
+            <span className="loginDesc">
+              Connect with friends and the world around you on GetSocial.
+            </span>
+          </div>
+          <div className="loginRight">
+            <form className="loginBox ">
+              <input
+                placeholder="Email"
+                required
+                type="email"
+                className="loginInput"
+                ref={email}
+              />
+              <input
+                ref={password}
+                required
+                minLength="6"
+                placeholder="Password"
+                type="password"
+                className="loginInput"
+              />
+              <button className="loginButton" onClick={handleClick}>
+                {isFetching ? (
+                  <CircularProgress
+                    color="inherit"
+                    size="20px"
+                    disabled={isFetching}
+                  />
+                ) : (
+                  "Log in"
+                )}
+              </button>
 
-            <span className="loginForgot">Forgot Password?</span>
-            <button
-              type="submit"
-              className="loginRegisterButton"
-              disabled={isFetching}
-            >
-              {isFetching ? (
-                <CircularProgress color="inherit" size="20px" />
-              ) : (
-                "Create a New Account"
-              )}
-            </button>
-          </form>
+              {/* <span className="loginForgot">Forgot Password?</span> */}
+              <a
+                href="/register"
+                type="submit"
+                className="loginRegisterButton"
+                disabled={isFetching}
+              >
+                {isFetching ? (
+                  <CircularProgress color="inherit" size="20px" />
+                ) : (
+                  "Create a New Account"
+                )}
+              </a>
+            </form>
+          </div>
         </div>
       </div>
-    </div>
+    </>
   );
 }

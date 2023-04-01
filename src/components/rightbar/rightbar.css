@@ -65,6 +65,7 @@
   
   .rightbarInfoValue{
     font-weight: 300;
+    margin-left: 5px;
   }
   
   .rightbarFollowings{
@@ -86,3 +87,35 @@
     object-fit: cover;
     border-radius: 5px;
   }
+
+
+  .userInfo{
+    display: flex;
+    align-items: start;
+
+  }
+  .userInfo .icon {
+    margin: 0 10px;
+  }
+
+  @media screen and (max-width: 1023px) {
+.rightbar{
+  /* display: none; */
+  position: absolute;
+  top: 50px;
+  right: -1000px;
+  top: 0;
+  background-color: white;
+  transition: all;
+transition-duration: 600ms;
+}
+    }
+    .rbSlide{
+  top: 50px;
+      
+right: 0;
+  z-index: 10;
+transition: all;
+transition-duration: 600ms;
+padding: 10px;
+    }

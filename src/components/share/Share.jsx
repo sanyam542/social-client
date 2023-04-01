@@ -11,16 +11,18 @@ import axios from "axios";
 import CancelIcon from "@mui/icons-material/Cancel";
 export default function Share() {
   const PF = process.env.REACT_APP_PUBLIC_FOLDER;
+  const SU = process.env.REACT_APP_SERVER_URL;
+
   const desc = useRef();
   const [file, setFile] = useState(null);
 
   // console.log(file.name);
-  const { user } = useContext(AuthContext);
+  const { user: currentUser } = useContext(AuthContext);
 
   const submitHandler = async (e) => {
     e.preventDefault();
     const newPost = {
-      userId: user._id,
+      userId: currentUser._id,
       desc: desc.current.value,
     };
 
@@ -32,7 +34,11 @@ export default function Share() {
       newPost.img = fileName;
       console.log(data);
       try {
-        axios.post("https://social-api-6q3t.onrender.com/api/upload", data);
+        axios.post(
+          `${SU}upload`,
+
+          data
+        );
       } catch (err) {
         console.log(err);
       }
@@ -40,10 +46,11 @@ export default function Share() {
 
     try {
       await axios.post(
-        "https://social-api-6q3t.onrender.com/api/posts",
+        `${SU}posts`,
+
         newPost
       );
-      window.location.reload();
+      // window.location.reload();
     } catch (err) {
       console.log(err);
     }
@@ -56,15 +63,15 @@ export default function Share() {
           <img
             className="shareProfileImg"
             src={
-              user.profilePicture
-                ? PF + user.profilePicture
+              currentUser.profilePicture
+                ? PF + currentUser.profilePicture
                 : PF + "/person/noAvatar.png"
             }
             alt=""
           />
           <input
             className="shareInput"
-            placeholder={"What's in your mind " + user.username + " ?"}
+            placeholder={"What's in your mind " + currentUser.username + " ?"}
             ref={desc}
           />
         </div>
@@ -82,19 +89,19 @@ export default function Share() {
           <div className="shareOptions">
             <label htmlFor="file" className="shareOption">
               <PermMediaIcon htmlColor="tomato" className="shareIcon" />
-              <span className="shareOptionText">Photo or Video</span>
+              <span className="shareOptionText">Photo </span>
               <input
                 style={{ display: "none" }}
+                accept=".jpg,.png,.jpeg"
                 type="file"
                 id="file"
-                accept=".jpg,.png,.jpeg"
                 onChange={(e) => {
                   setFile(e.target.files[0]);
                   console.log(e.target.files[0]);
                 }}
               />
             </label>
-            <div className="shareOption">
+            {/* <div className="shareOption">
               <LabelIcon htmlColor="blue" className="shareIcon" />
               <span className="shareOptionText">Tag</span>
             </div>
@@ -105,7 +112,7 @@ export default function Share() {
             <div className="shareOption">
               <EmojiEmotionsIcon htmlColor="goldenrod" className="shareIcon" />
               <span className="shareOptionText">Feelings</span>
-            </div>
+            </div> */}
           </div>
           <button className="shareButton" type="submit">
             Share

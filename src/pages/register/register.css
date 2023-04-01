@@ -83,9 +83,26 @@
       cursor: pointer;
 line-height: 45px;
       text-align: center;
+      text-decoration: none;
     }
     .a{
       color: white;
       text-decoration: none;
 
+  }
+
+  @media screen and (max-width:768px)  {
+    .loginWrapper{
+flex-direction: column;
+justify-content: center;
+align-items: center;
+    }
+    .loginLeft{
+      justify-content: center;
+      align-items: center;
+
+    }
+    .loginDesc{
+      text-align: center;
+    }
   }

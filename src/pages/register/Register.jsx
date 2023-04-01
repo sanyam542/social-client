@@ -1,8 +1,8 @@
 import "./register.css";
 import { useRef } from "react";
 import axios from "axios";
-import { register } from "timeago.js";
 import { useNavigate } from "react-router-dom";
+const SU = process.env.REACT_APP_SERVER_URL;
 
 export default function Login() {
   const username = useRef();
@@ -23,13 +23,21 @@ export default function Login() {
       };
 
       await axios
-        .post("https://social-api-6q3t.onrender.com/api/auth/register", user)
+        .post(
+          `${SU}auth/register`,
+
+          user
+        )
         .then(function (response) {
           console.log(response);
           navigate("/login");
+          alert("Account Created");
         })
         .catch(function (error) {
           console.log(error);
+          if (error.message === "Request failed with status code 500") {
+            alert("User Already Exists , Change Username or Email");
+          }
         });
     }
   };
@@ -38,9 +46,9 @@ export default function Login() {
     <div className="login">
       <div className="loginWrapper">
         <div className="loginLeft">
-          <h3 className="loginLogo">Lamasocial</h3>
+          <h3 className="loginLogo">GetSocial</h3>
           <span className="loginDesc">
-            Connece with friends and the world around you on Lamasocial.
+            Connect with friends and the world around you on GetSocial.
           </span>
         </div>
         <div className="loginRight">

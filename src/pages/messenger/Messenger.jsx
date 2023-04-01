@@ -7,6 +7,11 @@ import { useContext, useEffect, useRef, useState } from "react";
 import { AuthContext } from "../../context/AuthContext";
 import axios from "axios";
 import { io } from "socket.io-client";
+import AddIcon from "@mui/icons-material/Add";
+import ArrowBackIcon from "@mui/icons-material/ArrowBack";
+import ArrowForwardIcon from "@mui/icons-material/ArrowForward";
+const PF = process.env.REACT_APP_PUBLIC_FOLDER;
+const SU = process.env.REACT_APP_SERVER_URL;
 
 export default function Messenger() {
   const [conversations, setConversations] = useState([]);
@@ -18,9 +23,15 @@ export default function Messenger() {
   const socket = useRef();
   const { user } = useContext(AuthContext);
   const scrollRef = useRef();
+  const [friends, setFriends] = useState([]);
+  const [query, setQuery] = useState("");
+  const [chatmenu, setChatmenu] = useState(false);
 
   useEffect(() => {
-    socket.current = io("wss://social-socket-czw5.onrender.com");
+    socket.current = io(
+      // "wss://social-socket-czw5.onrender.com"
+      "ws://localhost:8900"
+    );
     socket.current.on("getMessage", (data) => {
       setArrivalMessage({
         sender: data.senderId,
@@ -48,9 +59,7 @@ export default function Messenger() {
   useEffect(() => {
     const getConversations = async () => {
       try {
-        const res = await axios.get(
-          "https://social-api-6q3t.onrender.com/api/conversations/" + user._id
-        );
+        const res = await axios.get(`${SU}conversations/` + user._id);
         setConversations(res.data);
       } catch (err) {
         console.log(err);
@@ -62,10 +71,7 @@ export default function Messenger() {
   useEffect(() => {
     const getMessages = async () => {
       try {
-        const res = await axios.get(
-          "https://social-api-6q3t.onrender.com/api/messages/" +
-            currentChat?._id
-        );
+        const res = await axios.get(`${SU}messages/` + currentChat?._id);
         setMessages(res.data);
       } catch (err) {
         console.log(err);
@@ -73,6 +79,31 @@ export default function Messenger() {
     };
     getMessages();
   }, [currentChat]);
+
+  useEffect(() => {
+    const getFriends = async () => {
+      try {
+        const friendList = await axios.get(`${SU}users/friends/` + user._id);
+        setFriends(friendList.data);
+      } catch (err) {
+        console.log(err);
+      }
+    };
+    getFriends();
+    console.log(user);
+  }, [user]);
+
+  // const createConversation = async () => {
+  //   let data = {
+  //     "senderId":user._id,
+  //   "receiverId":
+  //   };
+  //   try {
+  //     axios.post("http://localhost:8800/api/conversations", data);
+  //   } catch (err) {
+  //     console.log(err);
+  //   }
+  // };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -94,7 +125,8 @@ export default function Messenger() {
 
     try {
       const res = await axios.post(
-        "https://social-api-6q3t.onrender.com/api/messages",
+        `{SU}/messages`,
+
         message
       );
       setMessages([...messages, res.data]);
@@ -108,13 +140,84 @@ export default function Messenger() {
     scrollRef.current?.scrollIntoView({ behavior: "smooth" });
   }, [messages]);
 
+  const handleMenu = () => {
+    if (chatmenu === false) {
+      var element = document.querySelector(".chatMenuWrapper");
+      element.classList.add("displayNone");
+      setChatmenu(true);
+    } else {
+      var element = document.querySelector(".chatMenuWrapper");
+      element.classList.remove("displayNone");
+      setChatmenu(false);
+    }
+  };
+
   return (
     <>
       <Topbar />
       <div className="messenger">
         <div className="chatMenu">
+          <div className="arrowContainer">
+            {chatmenu ? (
+              <ArrowForwardIcon className="arrow" onClick={handleMenu} />
+            ) : (
+              <ArrowBackIcon className="arrow" onClick={handleMenu} />
+            )}
+          </div>
           <div className="chatMenuWrapper">
-            <input placeholder="Search for friends" className="chatMenuInput" />
+            <input
+              placeholder="Search for friends"
+              className="chatMenuInput"
+              onChange={(e) => setQuery(e.target.value.toLocaleLowerCase())}
+            />
+            {query !== "" ? (
+              <div className="conversationSearch">
+                <ul>
+                  {friends
+                    ?.filter(
+                      (user) =>
+                        user.username.toLowerCase().includes(query) &&
+                        !conversations.some((c) => c.members.includes(user._id))
+                    )
+                    .map((u) => {
+                      return (
+                        <li>
+                          {" "}
+                          <img
+                            src={
+                              u.profilePicture
+                                ? PF + "/" + u.profilePicture
+                                : PF + "/" + "person/noAvatar.png"
+                            }
+                            alt=""
+                            className=""
+                          />
+                          <p>{u.username}</p>
+                          <button
+                            className="add"
+                            onClick={async () => {
+                              try {
+                                axios.post(
+                                  `${SU}conversations/`,
+
+                                  { senderId: user._id, receiverId: u._id }
+                                );
+                                console.log("success");
+                                window.location.reload();
+                              } catch (err) {
+                                console.log(err);
+                              }
+                            }}
+                          >
+                            <AddIcon />
+                          </button>
+                        </li>
+                      );
+                    })}
+                </ul>
+              </div>
+            ) : null}
+
             {conversations.map((c) => (
               <div onClick={() => setCurrentChat(c)}>
                 <Conversation conversation={c} currentUser={user} />

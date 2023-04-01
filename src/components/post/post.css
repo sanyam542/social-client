@@ -76,3 +76,26 @@
       border-bottom: 1px dashed gray;
       font-size: 15px;
   }
+  .deleteButton{
+    border-radius: 4px;
+    background-color: white;
+    z-index: 3;
+  }
+  .deleteBox{
+    position: absolute;
+  display: flex;
+  width: 75px;
+align-items: center;
+  height: 30px;
+
+
+    background-color: white;
+    border: 1px solid black;
+    border-radius: 5px;
+    top: 30px;
+    right: -7px;
+    /* padding: 3px; */
+  }
+  .postTopRight{
+    position: relative;
+  }

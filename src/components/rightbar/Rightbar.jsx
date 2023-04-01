@@ -1,5 +1,5 @@
 import axios from "axios";
-import { useContext } from "react";
+import { useContext, useRef } from "react";
 import RemoveIcon from "@mui/icons-material/Remove";
 import { useState } from "react";
 import { useEffect } from "react";
@@ -10,17 +10,25 @@ import Online from "../online/Online.jsx";
 import "./rightbar.css";
 // console.log(Users);
 import AddIcon from "@mui/icons-material/Add";
+import EditIcon from "@mui/icons-material/Edit";
+import CloseIcon from "@mui/icons-material/Close";
 const PF = process.env.REACT_APP_PUBLIC_FOLDER;
+const SU = process.env.REACT_APP_SERVER_URL;
 
 export default function Rightbar({ user }) {
   const [friends, setFriends] = useState([]);
   const { user: currentUser, dispatch } = useContext(AuthContext);
   const [followed, setFollowed] = useState();
+  // currentUser.followings.includes(user?._id)
+  const [info, setInfo] = useState(false);
+  const inputCity = useRef("");
+  const inputFrom = useRef("");
+  const inputRelationship = useRef(1);
 
   useEffect(() => {
-    console.log(currentUser.followings);
-    console.log(user);
-    console.log(currentUser.followings.includes(user?._id));
+    // console.log(currentUser.followings);
+    // console.log(user?._id);
+    // console.log(currentUser.followings.includes(user?._id));
     currentUser.followings.includes(user?._id)
       ? setFollowed(true)
       : setFollowed(false);
@@ -29,13 +37,17 @@ export default function Rightbar({ user }) {
   useEffect(() => {
     const getFriends = async () => {
       try {
-        const friendList = await axios.get("/users/friends/" + user._id);
+        const friendList = await axios.get(
+          // "/users/friends/"
+          `${SU}users/friends/` + user._id
+        );
         setFriends(friendList.data);
       } catch (err) {
         console.log(err);
       }
     };
     getFriends();
+    // console.log(friends);
   }, [user]);
   // document.location.reload();
 
@@ -43,20 +55,49 @@ export default function Rightbar({ user }) {
     console.log(followed);
     try {
       if (followed) {
-        await axios.put(`/users/${user._id}/unfollow`, {
-          userId: currentUser._id,
-        });
+        await axios.put(
+          // `/users/${user._id}/unfollow`
+          `${SU}users/${user._id}/unfollow`,
+
+          {
+            userId: currentUser._id,
+          }
+        );
         dispatch({ type: "UNFOLLOW", payload: user._id });
       } else {
-        await axios.put(`/users/${user._id}/follow`, {
-          userId: currentUser._id,
-        });
+        await axios.put(
+          // `/users/${user._id}/follow`
+          `${SU}users/${user._id}/follow`,
+          {
+            userId: currentUser._id,
+          }
+        );
         dispatch({ type: "FOLLOW", payload: user._id });
       }
       setFollowed(!followed);
     } catch (error) {
       console.log(error);
     }
+  };
+
+  const handleInfoSubmit = async (e) => {
+    console.log("clicked");
+    e.preventDefault();
+    try {
+      await axios.put(
+        `${SU}users/${user._id}`,
+
+        {
+          city: inputCity.current.value,
+          from: inputFrom.current.value,
+          relationship: inputRelationship.current.value,
+          userId: user._id,
+        }
+      );
+    } catch (error) {
+      console.log(error);
+    }
+    window.location.reload();
   };
 
   const HomeRightbar = () => {
@@ -68,10 +109,10 @@ export default function Rightbar({ user }) {
             <b>Pola Foster</b> and<b> 3 other friends</b> have a birthday today
           </span>
         </div>
-        <img className="rightbarAd" src={PF + "ad.png"} alt="" />
+        <img className="rightbarAd" src={PF + "1576406586911.jpeg"} alt="" />
         <h4 className="rightbarTitle">Online Friends</h4>
         <ul className="rightbarFriendList">
-          {Users.map((u) => {
+          {Users?.map((u) => {
             return <Online key={u.id} user={u} />;
           })}
         </ul>
@@ -87,32 +128,61 @@ export default function Rightbar({ user }) {
             {followed ? <RemoveIcon /> : <AddIcon />}
           </button>
         )}
-        <h4 className="rightbarTitle">User Information</h4>
-        <div className="rightbarInfo">
-          <div className="rightbarInfoItem">
-            <span className="rightbarInfokey">City :</span>
-            <span className="rightbarInfoValue">{user.city}</span>
+        <form action="" onSubmit={handleInfoSubmit}>
+          <div className="userInfo">
+            <h4 className="rightbarTitle">User Information</h4>
+
+            {user.username == currentUser.username &&
+              (info ? (
+                <CloseIcon className="icon" onClick={() => setInfo(false)} />
+              ) : (
+                <EditIcon className="icon" onClick={() => setInfo(true)} />
+              ))}
+            {info ? <button type="submit">update</button> : null}
           </div>
-          <div className="rightbarInfoItem">
-            <span className="rightbarInfokey">From :</span>
-            <span className="rightbarInfoValue">{user.from}</span>
+          <div className="rightbarInfo">
+            <div className="rightbarInfoItem">
+              <span className="rightbarInfokey">
+                City : {info ? <input ref={inputCity} /> : null}
+              </span>
+              <span className="rightbarInfoValue">{user.city}</span>
+            </div>
+            <div className="rightbarInfoItem">
+              <span className="rightbarInfokey">
+                From :{info ? <input ref={inputFrom} /> : null}
+              </span>
+              <span className="rightbarInfoValue">{user.from}</span>
+            </div>
+            <div className="rightbarInfoItem">
+              <span className="rightbarInfokey">
+                Realtionship :{" "}
+                {info ? (
+                  <select
+                    name=""
+                    ref={inputRelationship}
+                    id=""
+                    onChange={() =>
+                      console.log(inputRelationship.current.value)
+                    }
+                  >
+                    {" "}
+                    <option value="1">1</option>
+                    <option value="2">2</option>
+                  </select>
+                ) : null}
+              </span>
+              <span className="rightbarInfoValue">
+                {user.relationship == 1 ? "Single" : "Married"}
+              </span>
+            </div>
           </div>
-          <div className="rightbarInfoItem">
-            <span className="rightbarInfokey">Realtionship :</span>
-            <span className="rightbarInfoValue">
-              {user.relationship
-                ? "Single"
-                : user.relationship === 1
-                ? "Married"
-                : "-"}
-            </span>
-          </div>
-        </div>
+        </form>
         <h4 className="rightbarTitle">User Friends</h4>
         <div className="rightbarFollowings">
-          {friends.map((friend) => (
-            <Link
-              to={"/profile/" + friend.username}
+          {friends?.map((friend) => (
+            <a
+              key={friend._id}
+              href={"/profile/" + friend.username}
               style={{ textDecoration: "none" }}
             >
               <div className="rightbarFollowing">
@@ -127,14 +197,14 @@ export default function Rightbar({ user }) {
                 />
                 <span className="rightbarFollowingName">{friend.username}</span>
               </div>
-            </Link>
+            </a>
           ))}
         </div>
       </>
     );
   };
   return (
-    <div className="rightbar ">
+    <div className="rightbar " id="rb">
       <div className="rightbarWrapper">
         {user ? <ProfileRightbar /> : <HomeRightbar />}
       </div>
