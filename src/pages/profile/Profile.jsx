@@ -162,7 +162,7 @@ export default function Profile() {
                 src={
                   user.coverPicture
                     ? PF + user.coverPicture
-                    : PF + "/marc-kleen-EjQxjS9y6yc-unsplash.jpg"
+                    : PF + "marc-kleen-EjQxjS9y6yc-unsplash.jpg"
                 }
               />
               <img
