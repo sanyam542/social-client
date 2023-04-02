@@ -55,7 +55,7 @@ export default function Profile() {
     }
     try {
       await axios.put(
-        `${SU}/users/${user._id}`,
+        `${SU}users/${user._id}`,
 
         newProfilePic
       );
