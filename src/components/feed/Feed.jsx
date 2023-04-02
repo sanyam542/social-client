@@ -55,11 +55,13 @@ export default function Feed(props) {
   return (
     <div className="feed">
       <div className="feedWrapper">
-        <div id="feedSearchBar">
-          <SearchBar
-            style={{ border: "1px solid black", borderRadius: "30px" }}
-          />
-        </div>
+        {props.profile !== "profile" && (
+          <div id="feedSearchBar">
+            <SearchBar
+              style={{ border: "1px solid black", borderRadius: "30px" }}
+            />
+          </div>
+        )}
         {(!props.username || props.username === user.username) && <Share />}
         {posts.map((p) => (
           <Post key={p._id} post={p} />
