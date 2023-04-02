@@ -49,7 +49,7 @@ export default function Profile() {
     data.append("name", fileName);
     newProfilePic.profilePicture = fileName;
     try {
-      axios.post(`${SU}/upload`, data);
+      await axios.post(`${SU}upload`, data);
     } catch (err) {
       console.log(err);
     }
@@ -78,7 +78,7 @@ export default function Profile() {
     data.append("name", fileName);
     newCoverPic.coverPicture = fileName;
     try {
-      axios.post(`${SU}api/upload`, data);
+      await axios.post(`${SU}upload`, data);
     } catch (err) {
       console.log(err);
     }
