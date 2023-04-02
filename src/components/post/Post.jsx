@@ -23,9 +23,9 @@ export default function Post(props) {
 
   const PF = process.env.REACT_APP_PUBLIC_FOLDER;
 
-  const likeHandler = () => {
+  const likeHandler = async () => {
     try {
-      axios.put(`${SU}posts/` + props.post._id + "/like", {
+      await axios.put(`${SU}posts/` + props.post._id + "/like", {
         userId: currentUser._id,
       });
     } catch (err) {
@@ -57,9 +57,9 @@ export default function Post(props) {
     fetchUser();
   }, [props.post.userId]);
 
-  const handleDelete = () => {
+  const handleDelete = async () => {
     try {
-      axios.post(`${SU}posts/${props.post._id}`, {
+      await axios.post(`${SU}posts/${props.post._id}`, {
         userId: currentUser._id,
       });
     } catch (err) {
