@@ -90,7 +90,6 @@ export default function Messenger() {
       }
     };
     getFriends();
-    console.log(user);
   }, [user]);
 
   // const createConversation = async () => {
@@ -186,10 +185,10 @@ export default function Messenger() {
                           <img
                             src={
                               u.profilePicture
-                                ? PF + "/" + u.profilePicture
-                                : PF + "/" + "person/noAvatar.png"
+                                ? PF + u.profilePicture
+                                : PF + "person/noAvatar.png"
                             }
-                            alt=""
+                            alt="img"
                             className=""
                           />
                           <p>{u.username}</p>
@@ -197,7 +196,7 @@ export default function Messenger() {
                             className="add"
                             onClick={async () => {
                               try {
-                                axios.post(
+                                await axios.post(
                                   `${SU}conversations/`,
                                   // "http://localhost:8800/api/conversations"
                                   { senderId: user._id, receiverId: u._id }

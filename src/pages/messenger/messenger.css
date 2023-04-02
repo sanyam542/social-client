@@ -103,6 +103,7 @@
     border: 1px solid black;
     position: fixed;
     border-radius: 5px;
+    z-index: 5;
   }
   .conversationSearch ul{
     padding: 0 10px;
