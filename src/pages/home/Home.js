@@ -11,9 +11,9 @@ export default function Home() {
       <Topbar />
 
       <div className="homeContainer">
-        <Sidebar className="sidebar" />
+        <Sidebar />
         <Feed />
-        <Rightbar className="rightbar" />
+        <Rightbar />
       </div>
     </>
   );

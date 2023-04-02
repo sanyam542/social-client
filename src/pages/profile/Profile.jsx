@@ -18,7 +18,7 @@ export default function Profile() {
   const [coverFile, setCoverFile] = useState(null);
   const { user: currentUser, dispatch } = useContext(AuthContext);
   const username = useParams().username;
-  console.log(SU);
+
   //fecthing data
   useEffect(() => {
     const fetchUser = async () => {

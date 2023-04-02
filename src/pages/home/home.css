@@ -6,4 +6,9 @@ padding: 0;
 .homeContainer{
     display: flex;
     width: 100%;
+    position: relative;
+    
 }
+/* body.lock-scroll {
+    overflow: hidden;
+  } */

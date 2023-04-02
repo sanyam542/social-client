@@ -9,6 +9,7 @@ import LogoutIcon from "@mui/icons-material/Logout";
 import MoreVertIcon from "@mui/icons-material/MoreVert";
 import MoreIcon from "@mui/icons-material/More";
 import { SearchBar } from "../searchBar/SearchBar";
+import { height } from "@mui/system";
 
 export default function Topbar() {
   // const [searchItems, setSearchItems] = useState(null);
@@ -63,6 +64,12 @@ export default function Topbar() {
 
   const url = window.location.href;
   const urlM = "http://localhost:3000/messenger";
+
+  // useEffect(() => {
+  //   var height = window.innerHeight;
+
+  //   console.log(height);
+  // }, [height]);
 
   return (
     <div className="topbarContainer">
