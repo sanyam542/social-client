@@ -68,7 +68,7 @@ export default function Profile() {
   };
 
   const handleCover = async (e) => {
-    // e.preventDefault();
+    e.preventDefault();
     const newCoverPic = {
       userId: user._id,
     };
@@ -88,6 +88,7 @@ export default function Profile() {
 
         newCoverPic
       );
+      window.location.reload();
     } catch (err) {
       console.log(err);
     }

@@ -29,8 +29,8 @@ export default function Messenger() {
 
   useEffect(() => {
     socket.current = io(
-      "wss://social-socket-czw5.onrender.com"
-      // "ws://localhost:8900"
+      // "wss://social-socket-czw5.onrender.com"
+      "ws://localhost:8900"
     );
     socket.current.on("getMessage", (data) => {
       setArrivalMessage({
@@ -125,7 +125,7 @@ export default function Messenger() {
 
     try {
       const res = await axios.post(
-        `{SU}/messages`,
+        `${SU}/messages/`,
 
         message
       );
@@ -199,7 +199,7 @@ export default function Messenger() {
                               try {
                                 axios.post(
                                   `${SU}conversations/`,
-
+                                  // "http://localhost:8800/api/conversations"
                                   { senderId: user._id, receiverId: u._id }
                                 );
                                 console.log("success");
