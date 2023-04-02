@@ -50,7 +50,7 @@ export default function Share() {
 
         newPost
       );
-      // window.location.reload();
+      window.location.reload();
     } catch (err) {
       console.log(err);
     }
