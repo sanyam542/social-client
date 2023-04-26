@@ -1,7 +1,10 @@
 import "./register.css";
-import { useRef } from "react";
+import { useContext, useRef } from "react";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
+import { AuthContext } from "../../context/AuthContext";
+import { CircularProgress } from "@mui/material";
+
 const SU = process.env.REACT_APP_SERVER_URL;
 
 export default function Login() {
@@ -10,6 +13,7 @@ export default function Login() {
   const password = useRef();
   const passwordAgain = useRef();
   const navigate = useNavigate();
+  const { isFetching } = useContext(AuthContext);
 
   const handleClick = async (e) => {
     e.preventDefault();
@@ -82,8 +86,20 @@ export default function Login() {
               className="loginInput"
               minLength="6"
             />
+
             <button className="loginButton" type="submit">
-              Sign Up
+              {isFetching ? (
+                <>
+                  <p>loading</p>
+                  <CircularProgress
+                    color="inherit"
+                    size="20px"
+                    // disabled={isFetching}
+                  />
+                </>
+              ) : (
+                "Sign Up"
+              )}
             </button>
           </form>
           <div className="loginRegisterButton">
