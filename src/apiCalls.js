@@ -3,7 +3,6 @@ import axios from "axios";
 const SU = process.env.REACT_APP_SERVER_URL;
 
 export const loginCall = async (userCredential, dispatch) => {
-  // dispatch({ type: "LOGIN_START" }).then(console.log("dispacthed"));
   dispatch({ type: "LOGIN_START" });
 
   try {
