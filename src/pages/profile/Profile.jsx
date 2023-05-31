@@ -51,6 +51,7 @@ export default function Profile() {
     try {
       const url = await axios.post(`${SU}upload`, data);
       newProfilePic.profilePicture = url.data;
+      dispatch({ type: "UPDATE", payload: url.data });
     } catch (err) {
       console.log(err);
     }
@@ -60,7 +61,6 @@ export default function Profile() {
 
         newProfilePic
       );
-      dispatch({ type: "UPDATE", payload: fileName });
       console.log(currentUser);
       window.location.reload();
     } catch (err) {
@@ -119,7 +119,7 @@ export default function Profile() {
           <div className="profileRightTop">
             {user.username === currentUser.username && (
               <form action="" onSubmit={handleCover} className="coverForm">
-                <label htmlFor="cover" className="edit Options hover">
+                <label htmlFor="cover" className="editCover">
                   <EditIcon />
                   <span className="editOptionText">Change cover picture</span>
                   <input

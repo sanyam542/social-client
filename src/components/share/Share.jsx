@@ -9,6 +9,7 @@ import { useRef } from "react";
 import { useState } from "react";
 import axios from "axios";
 import CancelIcon from "@mui/icons-material/Cancel";
+import { Link } from "react-router-dom";
 export default function Share() {
   const PF = process.env.REACT_APP_PUBLIC_FOLDER;
   const SU = process.env.REACT_APP_SERVER_URL;
@@ -65,15 +66,17 @@ export default function Share() {
     <div className="share">
       <div className="shareWrapper">
         <div className="shareTop">
-          <img
-            className="shareProfileImg"
-            src={
-              currentUser.profilePicture
-                ? currentUser.profilePicture
-                : PF + "/person/noAvatar.png"
-            }
-            alt=""
-          />
+          <Link to={`profile/${currentUser.username}`}>
+            <img
+              className="shareProfileImg"
+              src={
+                currentUser.profilePicture
+                  ? currentUser.profilePicture
+                  : PF + "/person/noAvatar.png"
+              }
+              alt=""
+            />
+          </Link>
           <input
             className="shareInput"
             placeholder={"What's in your mind " + currentUser.username + " ?"}

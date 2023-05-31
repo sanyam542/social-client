@@ -17,13 +17,6 @@ export default function Topbar() {
   const [logout, setLogout] = useState(false);
   const [addClass, setAddClass] = useState(false);
 
-  // console.log(
-  //   allUsers.data
-  //     ?.filter((user) => user.username.toLowerCase().includes(query))
-  //     .map((u) => {
-  //       return u.username;
-  //     })
-  // );
   const PF = process.env.REACT_APP_PUBLIC_FOLDER;
 
   const handleLogout = () => {
@@ -65,12 +58,6 @@ export default function Topbar() {
   const url = window.location.href;
   const urlM = "http://localhost:3000/messenger";
 
-  // useEffect(() => {
-  //   var height = window.innerHeight;
-
-  //   console.log(height);
-  // }, [height]);
-
   return (
     <div className="topbarContainer">
       <div className="topbarLeft">
@@ -78,14 +65,10 @@ export default function Topbar() {
           <span className="logo">GetSocial</span>
         </Link>
       </div>
-      {/* <div id="topBarSearch"> */}
+
       <SearchBar id="topBarSearch" />
-      {/* </div> */}
+
       <div className="topbarRight">
-        {/* <div className="topbarLink">
-          <span className="topbarLnk">Homepage</span>
-          <span className="topbarLink">Timeline</span>
-        </div> */}
         <div className="topbarIcons">
           {url !== urlM && (
             <div className="topbarIconItem personIcon">
@@ -97,10 +80,7 @@ export default function Topbar() {
               <ChatIcon />
             </a>
           </div>
-          {/* <div className="topbarIconItem">
-            <NotificationsIcon />
-            <span className="topbarIconBadge">1</span>
-          </div> */}
+
           <div className="topbarIconItem">
             <MoreVertIcon onClick={() => setLogout(!logout)} />
           </div>

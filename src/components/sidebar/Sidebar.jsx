@@ -100,7 +100,7 @@ export default function Sidebar() {
                   <img
                     src={
                       u.profilePicture
-                        ? PF + u.profilePicture
+                        ? u.profilePicture
                         : PF + "person/noAvatar.png"
                     }
                     alt="error"

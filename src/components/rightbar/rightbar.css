@@ -84,6 +84,11 @@ padding: 2px;
     display: flex;
     flex-wrap: wrap;
     justify-content: space-between;
+    
+  }
+  .rightbarFollowingName{
+color: black;
+font-size: smaller;
   }
   
   .rightbarFollowing{
@@ -117,6 +122,9 @@ padding: 2px;
   }
 
   @media screen and (max-width: 1023px) {
+    .rightbarAd{
+      width: 280px;
+    }
 .rightbar{
   position: absolute;
     top: 50px;
@@ -129,6 +137,11 @@ padding: 2px;
     transition: all;
   transition-duration: 600ms;
 }
+.rightbarFollowings{
+ flex-wrap: wrap; 
+ flex-direction: column;
+}
+
 }
 .rbSlide{
   /* top: 50px; */

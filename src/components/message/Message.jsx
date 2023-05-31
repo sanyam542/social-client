@@ -35,7 +35,7 @@ export default function Message({ message, own }) {
         <img
           src={
             user?.profilePicture
-              ? PF + "/" + user.profilePicture
+              ? user.profilePicture
               : PF + "/" + "person/noAvatar.png"
           }
           className="messageImg"

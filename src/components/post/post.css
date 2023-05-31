@@ -80,6 +80,8 @@
     border-radius: 4px;
     background-color: white;
     z-index: 3;
+    cursor: pointer;
+
   }
   .deleteBox{
     position: absolute;
@@ -88,9 +90,9 @@
 align-items: center;
   height: 30px;
 
-
+color: gray;
     background-color: white;
-    border: 1px solid black;
+    border: 1px solid grey;
     border-radius: 5px;
     top: 30px;
     right: -7px;

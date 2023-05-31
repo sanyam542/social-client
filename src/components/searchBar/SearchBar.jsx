@@ -55,13 +55,15 @@ export const SearchBar = (props) => {
                       <img
                         src={
                           u.profilePicture
-                            ? PF + u.profilePicture
+                            ? u.profilePicture
                             : PF + "person/noAvatar.png"
                         }
                         alt=""
                         className="topbarImg"
                       />
-                      <a href={`/profile/${u.username}`}>{u.username}</a>
+                      <a href={`/profile/${u.username}`} className="usersLink">
+                        {u.username}
+                      </a>
                     </li>
                     <hr />
                   </>

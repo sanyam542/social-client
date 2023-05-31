@@ -185,7 +185,7 @@ export default function Messenger() {
                           <img
                             src={
                               u.profilePicture
-                                ? PF + u.profilePicture
+                                ? u.profilePicture
                                 : PF + "person/noAvatar.png"
                             }
                             alt="img"

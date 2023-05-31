@@ -37,7 +37,7 @@ padding-bottom: 2px;
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    border-bottom: 2px  solid black;
+    border-bottom: 2px  solid rgb(194, 193, 193);
 
 }
 
@@ -56,8 +56,11 @@ padding-bottom: 2px;
 
 .editOptionText{
     font-size: 14px;
-
+    padding: 5px;
     font-weight: 600;
+cursor: pointer;
+
+    
 }
 
 .profileUserImg:hover .editProfileDiv{
@@ -106,12 +109,20 @@ display: none;
     position: absolute;
     left: 160px;
     z-index: 5;
+    color: gray;
+    background-color: white;
+    border: 1px solid grey;
+    border-radius: 5px;
+    padding: 5px;
 }
 .CancelImg{
     position: absolute;
     left: 175px;
 top: 25px;
-    border: 1px solid black;
+    border: 1px solid grey;
+    /* border: 1px solid black; */
+cursor: pointer;
+    border-radius: 5px;
 color: white;
 
 }
@@ -120,6 +131,10 @@ color: white;
     color: white;
     z-index: 2;
     width: 160px;
+}
+.editCover{
+cursor: pointer;
+
 }
 .profileForm{
     width: 150px;
@@ -141,6 +156,7 @@ cursor: pointer;
 }
 .editProfileDiv{
     margin-top: 65px;
+    text-shadow: 0 0 2px #8c8c8c, 0 0 2px #727272;
 }
 .coverPicUpdate{
     width: 100%;
@@ -149,11 +165,12 @@ cursor: pointer;
     z-index: 1;
     position: absolute;
     top: 50px;
+    
 }
 .coverForm{
     position: absolute;
     z-index: 2;
-
+    text-shadow: 0 0 2px #8c8c8c, 0 0 2px #727272;
     color: white;
     width: 200px;
 }
