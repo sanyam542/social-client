@@ -172,33 +172,45 @@ export default function Rightbar({ user }) {
                 ) : null}
               </span>
               <span className="rightbarInfoValue">
-                {user.relationship == 1 ? "Single" : "Married"}
+                {user?.relationship == 1
+                  ? "Single"
+                  : user?.relationship == 2
+                  ? "Married"
+                  : null}
               </span>
             </div>
           </div>
         </form>
         <h4 className="rightbarTitle">User Friends</h4>
         <div className="rightbarFollowings">
-          {friends?.map((friend) => (
-            <a
-              key={friend._id}
-              href={"/profile/" + friend.username}
-              style={{ textDecoration: "none" }}
-            >
-              <div className="rightbarFollowing">
-                <img
-                  src={
-                    friend.profilePicture
-                      ? PF + friend.profilePicture
-                      : PF + "person/noAvatar.png"
-                  }
-                  alt=""
-                  className="rightbarFollowingImg"
-                />
-                <span className="rightbarFollowingName">{friend.username}</span>
-              </div>
-            </a>
-          ))}
+          {friends.length !== 0 ? (
+            friends?.map((friend) => (
+              <a
+                key={friend._id}
+                href={"/profile/" + friend.username}
+                style={{ textDecoration: "none" }}
+              >
+                <div className="rightbarFollowing">
+                  <img
+                    src={
+                      friend.profilePicture
+                        ? friend.profilePicture
+                        : PF + "person/noAvatar.png"
+                    }
+                    alt=""
+                    className="rightbarFollowingImg"
+                  />
+                  <span className="rightbarFollowingName">
+                    {friend.username}
+                  </span>
+                </div>
+              </a>
+            ))
+          ) : (
+            <div>
+              <h4>No Friends</h4>
+            </div>
+          )}
         </div>
       </>
     );

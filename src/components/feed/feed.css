@@ -1,10 +1,19 @@
 .feed{
-    flex:5.5
+    flex:5.5;
+
+    
 }
 
 .feedWrapper{
     padding: 20px;
     /* margin: 40px; */
+}
+
+.noPostsContainer{
+
+text-align: center;
+font-size: 25px;
+color: grey;
 }
 
 @media screen and (min-width:1024px) {

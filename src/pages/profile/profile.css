@@ -33,9 +33,12 @@
 
 .profileInfo{
     display: flex;
+padding-bottom: 2px;
     flex-direction: column;
     align-items: center;
     justify-content: center;
+    border-bottom: 2px  solid black;
+
 }
 
 .profileInfoName{

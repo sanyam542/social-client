@@ -27,18 +27,23 @@ export default function Share() {
     };
 
     if (file) {
+      console.log(file);
       const data = new FormData();
       const fileName = file.name;
       data.append("file", file);
       data.append("name", fileName);
-      newPost.img = fileName;
+      // newPost.img = fileName;
       console.log(data);
       try {
-        await axios.post(
+        const url = await axios.post(
           `${SU}upload`,
 
           data
         );
+
+        newPost.img = url.data;
+
+        console.log("this one", url.data);
       } catch (err) {
         console.log(err);
       }
@@ -64,7 +69,7 @@ export default function Share() {
             className="shareProfileImg"
             src={
               currentUser.profilePicture
-                ? PF + currentUser.profilePicture
+                ? currentUser.profilePicture
                 : PF + "/person/noAvatar.png"
             }
             alt=""

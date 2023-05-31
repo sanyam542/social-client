@@ -47,9 +47,10 @@ export default function Profile() {
     const fileName = dpFile.name;
     data.append("file", dpFile);
     data.append("name", fileName);
-    newProfilePic.profilePicture = fileName;
+    // newProfilePic.profilePicture = fileName;
     try {
-      await axios.post(`${SU}upload`, data);
+      const url = await axios.post(`${SU}upload`, data);
+      newProfilePic.profilePicture = url.data;
     } catch (err) {
       console.log(err);
     }
@@ -76,9 +77,10 @@ export default function Profile() {
     const fileName = coverFile.name;
     data.append("file", coverFile);
     data.append("name", fileName);
-    newCoverPic.coverPicture = fileName;
+    // newCoverPic.coverPicture = fileName;
     try {
-      await axios.post(`${SU}upload`, data);
+      const url = await axios.post(`${SU}upload`, data);
+      newCoverPic.coverPicture = url.data;
     } catch (err) {
       console.log(err);
     }
@@ -88,6 +90,7 @@ export default function Profile() {
 
         newCoverPic
       );
+
       window.location.reload();
     } catch (err) {
       console.log(err);
@@ -162,7 +165,7 @@ export default function Profile() {
                 className=" profileCoverImg "
                 src={
                   user.coverPicture
-                    ? PF + user.coverPicture
+                    ? user.coverPicture
                     : PF + "marc-kleen-EjQxjS9y6yc-unsplash.jpg"
                 }
               />
@@ -170,7 +173,7 @@ export default function Profile() {
                 className="profileUserImg"
                 src={
                   user.profilePicture
-                    ? PF + user.profilePicture
+                    ? user.profilePicture
                     : PF + "/person/noAvatar.png"
                 }
               />
@@ -216,6 +219,8 @@ export default function Profile() {
             </div>
             <div className="profileInfo">
               <h4 className="profileInfoName">{user.username}</h4>
+
+              <hr />
               <span className="profileInfoDesc">{user.desc}</span>
             </div>
           </div>

@@ -88,7 +88,7 @@ export default function Post(props) {
               <img
                 src={
                   user.profilePicture
-                    ? PF + user.profilePicture
+                    ? user.profilePicture
                     : PF + "/person/noAvatar.png"
                 }
                 alt=""
@@ -116,7 +116,7 @@ export default function Post(props) {
         <div className="postCenter">
           <span className="postText">{props.post?.desc}</span>
           {props.post.img != null && (
-            <img className="postImg" src={PF + props.post.img} />
+            <img className="postImg" src={props.post.img} />
           )}
           {/* {console.log(props.post.img)} */}
         </div>

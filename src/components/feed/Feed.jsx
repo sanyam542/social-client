@@ -63,9 +63,13 @@ export default function Feed(props) {
           </div>
         )}
         {(!props.username || props.username === user.username) && <Share />}
-        {posts.map((p) => (
-          <Post key={p._id} post={p} />
-        ))}
+        {posts.length !== 0 ? (
+          posts.map((p) => <Post key={p._id} post={p} />)
+        ) : (
+          <div className="noPostsContainer">
+            <h4>No Posts Yet</h4>
+          </div>
+        )}
       </div>
     </div>
   );
