@@ -16,7 +16,7 @@ export default function Feed(props) {
 
   useEffect(() => {
     const fetchPosts = async () => {
-      const res = props.username
+      props.username
         ? await axios
             .get(`${SU}posts/profile/` + props.username)
             .then(function (response) {
@@ -32,10 +32,7 @@ export default function Feed(props) {
               console.log(error);
             })
         : await axios
-            .get(
-              // "https://social-api-6q3t.onrender.com/api/posts/timeline/"
-              `${SU}posts/timeline/` + user._id
-            )
+            .get(`${SU}posts/timeline/` + user._id)
             .then(function (response) {
               // handle success
               setPosts(
@@ -50,7 +47,7 @@ export default function Feed(props) {
             });
     };
     fetchPosts();
-  }, [user, user._id]);
+  }, [user, user._id, props.username]);
 
   return (
     <div className="feed">

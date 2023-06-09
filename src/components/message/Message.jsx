@@ -10,21 +10,15 @@ export default function Message({ message, own }) {
   useEffect(() => {
     const fetchUser = async () => {
       await axios
-        .get(
-          // `/users?username=${username}`
-          `${SU}users/?userId=${message.sender}`
-        )
+        .get(`${SU}users/?userId=${message.sender}`)
 
         .then(function (response) {
-          // handle success
-          // console.log(response);
           setUser(response.data);
         })
         .catch(function (error) {
           // handle error
           console.log(error);
         });
-      // console.log(user);
     };
     fetchUser();
   }, [message]);
@@ -36,7 +30,7 @@ export default function Message({ message, own }) {
           src={
             user?.profilePicture
               ? user.profilePicture
-              : PF + "/" + "person/noAvatar.png"
+              : `{${PF}/person/noAvatar.png}`
           }
           className="messageImg"
           alt=""

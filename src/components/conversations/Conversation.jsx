@@ -15,13 +15,12 @@ export default function Conversation({ conversation, currentUser }) {
       try {
         const res = await axios.get(`${SU}users?userId=` + friendId);
         setUser(res.data);
-        // console.log(user);
       } catch (error) {
         console.log(error);
       }
     };
     getUser();
-  }, [currentUser, conversation]);
+  }, [currentUser, conversation, SU]);
 
   return (
     <div className="conversation">
@@ -34,7 +33,7 @@ export default function Conversation({ conversation, currentUser }) {
         className="conversationImg"
         alt={user?.username}
       />
-      {/* <p className="convName">{user?.username}</p> */}
+
       <span className="conversationName">{user?.username}</span>
     </div>
   );

@@ -36,21 +36,15 @@ export default function Post(props) {
     setIsLiked(!isLiked);
   };
 
-  // const user = Users.filter((u) => u.id === 1);
-  // console.log(user);
-
   //fecthing data
   useEffect(() => {
     const fetchUser = async () => {
       await axios
         .get(`${SU}users/?userId=${props.post.userId}`)
         .then(function (response) {
-          // handle success
           setUser(response.data);
-          // console.log(response.data);
         })
         .catch(function (error) {
-          // handle error
           console.log(error);
         });
     };
@@ -66,16 +60,6 @@ export default function Post(props) {
       console.log(err);
     }
 
-    // axios
-    //   .delete(`http://localhost:8800/api/posts/${props.post._id}`, {
-    //     userId: currentUser._id,
-    //   })
-
-    //   .catch(function (error) {
-    //     // handle error
-    //     console.log(error);
-    //   });
-    console.log(currentUser._id);
     window.location.reload();
   };
 
@@ -91,7 +75,7 @@ export default function Post(props) {
                     ? user.profilePicture
                     : PF + "/person/noAvatar.png"
                 }
-                alt=""
+                alt="profilePic"
                 className="postProfileImg"
               />
             </Link>
@@ -116,23 +100,16 @@ export default function Post(props) {
         <div className="postCenter">
           <span className="postText">{props.post?.desc}</span>
           {props.post.img != null && (
-            <img className="postImg" src={props.post.img} />
+            <img className="postImg" src={props.post.img} alt="post" />
           )}
-          {/* {console.log(props.post.img)} */}
         </div>
         <div className="postBottom">
           <div className="postBottomLeft">
-            {/* <img
-              className="likeIcon"
-              src={PF + "/like.png"}
-              onClick={likeHandler}
-              alt=""
-            /> */}
             <img
               className="likeIcon"
               src={PF + "/heart.png"}
               onClick={likeHandler}
-              alt=""
+              alt="like"
             />
             <span className="postLikeCounter">{like} people liked it</span>
           </div>

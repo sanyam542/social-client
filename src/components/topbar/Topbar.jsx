@@ -1,18 +1,16 @@
 import "./topbar.css";
 import PersonIcon from "@mui/icons-material/Person";
 import ChatIcon from "@mui/icons-material/Chat";
-import NotificationsIcon from "@mui/icons-material/Notifications";
+
 import { Link, redirect } from "react-router-dom";
-import { useContext, useState, useEffect } from "react";
+import { useContext, useState } from "react";
 import { AuthContext } from "../../context/AuthContext";
 import LogoutIcon from "@mui/icons-material/Logout";
 import MoreVertIcon from "@mui/icons-material/MoreVert";
 import MoreIcon from "@mui/icons-material/More";
 import { SearchBar } from "../searchBar/SearchBar";
-import { height } from "@mui/system";
 
 export default function Topbar() {
-  // const [searchItems, setSearchItems] = useState(null);
   const { user } = useContext(AuthContext);
   const [logout, setLogout] = useState(false);
   const [addClass, setAddClass] = useState(false);
@@ -22,16 +20,16 @@ export default function Topbar() {
   const handleLogout = () => {
     redirect("/");
     localStorage.clear();
-    // window.location.replace("http://localhost:3000/");
+
     window.location.reload();
   };
 
   function handleClickRight() {
-    if (addClass == "sb" || addClass == null) {
+    if (addClass === "sb" || addClass === null) {
       var element1 = document.querySelector("#sb");
       element1.classList.remove("sbSlide");
-      var element = document.querySelector("#rb");
-      element.classList.add("rbSlide");
+      var element2 = document.querySelector("#rb");
+      element2.classList.add("rbSlide");
       setAddClass("rb");
     } else {
       var element = document.querySelector("#rb");
@@ -40,15 +38,13 @@ export default function Topbar() {
     }
   }
   function handleClickLeft() {
-    if (addClass == "rb" || addClass == null) {
+    if (addClass === "rb" || addClass === null) {
       var element1 = document.querySelector("#rb");
       element1.classList.remove("rbSlide");
-      var element = document.querySelector("#sb");
-      element.classList.add("sbSlide");
+      var element2 = document.querySelector("#sb");
+      element2.classList.add("sbSlide");
       setAddClass("sb");
     } else {
-      // var element1 = document.querySelector("#rb");
-      // element1.classList.remove("rbSlide");
       setAddClass(null);
       var element = document.querySelector("#sb");
       element.classList.remove("sbSlide");

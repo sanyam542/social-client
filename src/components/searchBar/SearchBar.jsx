@@ -12,16 +12,12 @@ export const SearchBar = (props) => {
   const [allUsers, setAllUsers] = useState([]);
   useEffect(() => {
     const fetchUsers = async () => {
-      const res = axios
+      axios
         .get(`${SU}users/all`)
         .then(function (response) {
-          // handle success
-
           setAllUsers(response);
-          // console.log(response);
         })
         .catch(function (error) {
-          // handle error
           console.log(error);
         });
     };
@@ -36,7 +32,6 @@ export const SearchBar = (props) => {
           onChange={(e) => setQuery(e.target.value.toLocaleLowerCase())}
           placeholder="Search for a User"
           className="searchInput"
-          // onChange={(e)=>}
         />
         {query !== "" ? (
           <CloseIcon className="closeIcon" onClick={() => setQuery("")} />

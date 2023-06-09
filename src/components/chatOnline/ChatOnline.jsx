@@ -15,7 +15,7 @@ export default function ChatOnline({ onlineUsers, currentId, setCurrentChat }) {
     };
 
     getFriends();
-  }, [currentId]);
+  }, [currentId, SU]);
 
   useEffect(() => {
     setOnlineFriends(friends.filter((f) => onlineUsers.includes(f._id)));

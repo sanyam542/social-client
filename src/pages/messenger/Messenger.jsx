@@ -145,8 +145,8 @@ export default function Messenger() {
       element.classList.add("displayNone");
       setChatmenu(true);
     } else {
-      var element = document.querySelector(".chatMenuWrapper");
-      element.classList.remove("displayNone");
+      var element1 = document.querySelector(".chatMenuWrapper");
+      element1.classList.remove("displayNone");
       setChatmenu(false);
     }
   };

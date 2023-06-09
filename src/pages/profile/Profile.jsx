@@ -3,9 +3,9 @@ import Feed from "../../components/feed/Feed";
 import Rightbar from "../../components/rightbar/Rightbar";
 import Sidebar from "../../components/sidebar/Sidebar";
 import Topbar from "../../components/topbar/Topbar";
-import { useState, useEffect, useRef, useContext } from "react";
+import { useState, useEffect, useContext } from "react";
 import axios from "axios";
-import { useParams, userParams } from "react-router";
+import { useParams } from "react-router";
 import { AuthContext } from "../../context/AuthContext";
 import EditIcon from "@mui/icons-material/Edit";
 import CancelIcon from "@mui/icons-material/Cancel";
@@ -156,6 +156,7 @@ export default function Profile() {
                 <img
                   src={URL.createObjectURL(coverFile)}
                   className="coverPicUpdate"
+                  alt="cover"
                 />
               </div>
             )}
@@ -168,6 +169,7 @@ export default function Profile() {
                     ? user.coverPicture
                     : PF + "marc-kleen-EjQxjS9y6yc-unsplash.jpg"
                 }
+                alt="cover"
               />
               <img
                 className="profileUserImg"
@@ -176,6 +178,7 @@ export default function Profile() {
                     ? user.profilePicture
                     : PF + "/person/noAvatar.png"
                 }
+                alt="profilePic"
               />
 
               {user.username === currentUser.username && (
@@ -213,6 +216,7 @@ export default function Profile() {
                   <img
                     src={URL.createObjectURL(dpFile)}
                     className="proflePicUpdate"
+                    alt="profilePic"
                   />
                 </div>
               )}
