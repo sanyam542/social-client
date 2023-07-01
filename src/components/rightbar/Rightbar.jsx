@@ -1,6 +1,6 @@
 import axios from "axios";
 import { useContext, useRef } from "react";
-import RemoveIcon from "@mui/icons-material/Remove";
+
 import { useState } from "react";
 import { useEffect } from "react";
 
@@ -9,27 +9,20 @@ import { Users } from "../../dummyData";
 import Online from "../online/Online.jsx";
 import "./rightbar.css";
 
-import AddIcon from "@mui/icons-material/Add";
 import EditIcon from "@mui/icons-material/Edit";
 import CloseIcon from "@mui/icons-material/Close";
+
 const PF = process.env.REACT_APP_PUBLIC_FOLDER;
 const SU = process.env.REACT_APP_SERVER_URL;
 
 export default function Rightbar({ user }) {
   const [friends, setFriends] = useState([]);
-  const { user: currentUser, dispatch } = useContext(AuthContext);
-  const [followed, setFollowed] = useState();
+  const { user: currentUser } = useContext(AuthContext);
 
   const [info, setInfo] = useState(false);
   const inputCity = useRef("");
   const inputFrom = useRef("");
   const inputRelationship = useRef(1);
-
-  useEffect(() => {
-    currentUser.followings.includes(user?._id)
-      ? setFollowed(true)
-      : setFollowed(false);
-  }, [currentUser, user]);
 
   useEffect(() => {
     const getFriends = async () => {
@@ -42,29 +35,6 @@ export default function Rightbar({ user }) {
     };
     getFriends();
   }, [user]);
-
-  const handleClick = async () => {
-    try {
-      if (followed) {
-        await axios.put(
-          `${SU}users/${user._id}/unfollow`,
-
-          {
-            userId: currentUser._id,
-          }
-        );
-        dispatch({ type: "UNFOLLOW", payload: user._id });
-      } else {
-        await axios.put(`${SU}users/${user._id}/follow`, {
-          userId: currentUser._id,
-        });
-        dispatch({ type: "FOLLOW", payload: user._id });
-      }
-      setFollowed(!followed);
-    } catch (error) {
-      console.log(error);
-    }
-  };
 
   const handleInfoSubmit = async (e) => {
     e.preventDefault();
@@ -107,12 +77,6 @@ export default function Rightbar({ user }) {
   const ProfileRightbar = () => {
     return (
       <>
-        {user.username !== currentUser.username && (
-          <button className="rightbarFollowButton" onClick={handleClick}>
-            {followed ? "Unfollow" : "Follow"}
-            {followed ? <RemoveIcon /> : <AddIcon />}
-          </button>
-        )}
         <form action="" onSubmit={handleInfoSubmit}>
           <div className="userInfo">
             <h4 className="rightbarTitle">User Information</h4>
@@ -157,7 +121,6 @@ export default function Rightbar({ user }) {
                   : null}
               </span>
             </div>
-            x
           </div>
         </form>
         <h4 className="rightbarTitle">User Friends</h4>

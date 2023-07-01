@@ -9,6 +9,7 @@ import { useParams } from "react-router";
 import { AuthContext } from "../../context/AuthContext";
 import EditIcon from "@mui/icons-material/Edit";
 import CancelIcon from "@mui/icons-material/Cancel";
+import FollowButton from "../../components/followButton/FollowButton";
 const PF = process.env.REACT_APP_PUBLIC_FOLDER;
 const SU = process.env.REACT_APP_SERVER_URL;
 
@@ -226,6 +227,8 @@ export default function Profile() {
 
               <hr />
               <span className="profileInfoDesc">{user.desc}</span>
+
+              <FollowButton user={user} />
             </div>
           </div>
           <div className="profileRightBottom">
