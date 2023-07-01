@@ -82,7 +82,9 @@
     }
   
     .chatMenuInput {
-      display: none;
+      display: block;
+      width: 120px;
+      margin-top: 30px;
     }
   
     .chatBox{

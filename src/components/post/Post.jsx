@@ -8,6 +8,7 @@ import { useContext } from "react";
 import { AuthContext } from "../../context/AuthContext";
 import DeleteIcon from "@mui/icons-material/Delete";
 const SU = process.env.REACT_APP_SERVER_URL;
+const PF = process.env.REACT_APP_PUBLIC_FOLDER;
 
 export default function Post(props) {
   const [like, setlike] = useState(props.post.likes.length);
@@ -20,8 +21,6 @@ export default function Post(props) {
   useEffect(() => {
     setIsLiked(props.post.likes.includes(currentUser._id));
   }, [currentUser._id, props.post.likes]);
-
-  const PF = process.env.REACT_APP_PUBLIC_FOLDER;
 
   const likeHandler = async () => {
     try {
@@ -107,7 +106,7 @@ export default function Post(props) {
           <div className="postBottomLeft">
             <img
               className="likeIcon"
-              src={PF + "/heart.png"}
+              src={PF + "heart.png"}
               onClick={likeHandler}
               alt="like"
             />

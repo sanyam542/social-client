@@ -13,7 +13,7 @@ import { SearchBar } from "../searchBar/SearchBar";
 export default function Topbar() {
   const { user } = useContext(AuthContext);
   const [logout, setLogout] = useState(false);
-  const [addClass, setAddClass] = useState(false);
+  const [addClass, setAddClass] = useState(null);
 
   const PF = process.env.REACT_APP_PUBLIC_FOLDER;
 

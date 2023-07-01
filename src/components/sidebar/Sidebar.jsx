@@ -30,6 +30,7 @@ export default function Sidebar() {
           // handle error
           console.log(error);
         });
+      console.log(PF);
     };
     fetchUsers();
   }, []);
@@ -92,7 +93,7 @@ export default function Sidebar() {
                     src={
                       u.profilePicture
                         ? u.profilePicture
-                        : PF + "person/noAvatar.png"
+                        : PF + "/person/noAvatar.png"
                     }
                     alt="error"
                     className="sidebarImg"
