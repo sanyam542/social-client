@@ -30,7 +30,6 @@ export default function Sidebar() {
           // handle error
           console.log(error);
         });
-      console.log(PF);
     };
     fetchUsers();
   }, []);

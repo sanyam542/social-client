@@ -233,7 +233,7 @@ export default function Profile() {
           </div>
           <div className="profileRightBottom">
             <Feed username={username} profile="profile" />
-            <Rightbar user={user} className="rightbar" />
+            <Rightbar user={user} />
           </div>
         </div>
       </div>
